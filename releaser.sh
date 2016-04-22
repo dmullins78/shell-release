@@ -12,9 +12,7 @@ semverParseInto `cat prod.txt` MAJOR MINOR PATCH SPECIAL
 EXISTING_VERSION="$MAJOR.$MINOR.$PATCH"
 NEW_VERSION="$MAJOR.$MINOR.$((PATCH+1))"
 
-echo "$NEW_VERSION" > prod.txt
+git diff --name-only ibs-3.0.7 ibs-3.0.9
 
-git add prod.txt
-git commit -m "Tagging version $NEW_VERSION"
-git tag -a "$NEW_VERSION" -m "Tagging version $NEW_VERSION"
-git push --tags
+#echo "MINOR $NEW_VERSION"
+#echo "$NEW_VERSION" > prod.txt
