@@ -1,18 +1,13 @@
 #!/usr/bin/env sh
 
-. ./semver.sh  
+ENVIRONMENT=$1
+NEW_VERSION=$2
+EXISTING_VERSION=`cat $ENVIRONMENT.txt`
 
-MAJOR=0  
-MINOR=0  
-PATCH=0  
-SPECIAL=""
+changed_files=($(git diff --name-only $EXISTING_VERSION $NEW_VERSION))
 
-semverParseInto `cat prod.txt` MAJOR MINOR PATCH SPECIAL  
+for change in $changed_files; do
+  echo $change
+done
 
-EXISTING_VERSION="$MAJOR.$MINOR.$PATCH"
-NEW_VERSION="$MAJOR.$MINOR.$((PATCH+1))"
 
-git diff --name-only ibs-3.0.7 ibs-3.0.9
-
-#echo "MINOR $NEW_VERSION"
-#echo "$NEW_VERSION" > prod.txt
